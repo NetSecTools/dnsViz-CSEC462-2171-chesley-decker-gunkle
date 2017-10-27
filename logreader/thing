@@ -1,0 +1,5 @@
+Feb 27 15:12:27 srv named[8978]: client 1.2.2.3#56853: query: meta.wikimedia.org IN AAAA +
+Feb 27 15:12:27 srv named[8978]: client 1.1.1.2#38595: query: a1470.g.akamai.net IN A +E
+Feb 27 15:12:28 srv named[8978]: client 1.1.1.2#38595: query: www.allegro.pl IN A +E
+Feb 27 15:12:28 srv named[8978]: client 1.1.1.2#38595: query: allegro.by IN A +E
+Feb 27 15:12:28 srv named[8978]: client 1.1.1.2#38595: query: aukro.bg IN A +E
