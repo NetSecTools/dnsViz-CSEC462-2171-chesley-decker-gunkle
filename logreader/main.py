@@ -1,13 +1,13 @@
 import csv
 import subprocess
-import dnsconf
 import re
 from time import sleep
+from dnsconf import LOGGING_FILE
+from dnsconf import SLEEP_TIMER
+from dnsconf import LOG_REGEX
 
-def LOGGING_FILE(): return "./thing"
-def SLEEP_TIMER(): return 10
-def LOG_REGEX(): "\d{1,2}-\S{3}-\d{1,4} \d\d:\d\d:\d\d\.\d\d\d.*\b(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\b#\d{0,5}" \
-                 " \((.*)\): .*: (.*) IN (.*) ([+-])(\S{1}) \((\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\)"#Logs are long
+
+
 
 BIND_MONTHS_DICT = {
     "Jan" : 1,
@@ -25,10 +25,11 @@ BIND_MONTHS_DICT = {
 }
 
 def main():
-    regexExp = re.compile(LOGGING_FILE())
-    while():
-        subprocess.getoutput("tail -f " + dnsconf.LOGGING_FILE())
-        sleep(SLEEP_TIMER())
+    regexExp = re.compile(LOG_REGEX)
+    while(True):
+        tailedLog = subprocess.getoutput("tail " + LOGGING_FILE)
+        print(tailedLog)
+        sleep(SLEEP_TIMER)
 
 
 if __name__ == "__main__":
