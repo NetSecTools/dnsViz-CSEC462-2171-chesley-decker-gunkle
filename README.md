@@ -1,4 +1,4 @@
-DNSViz
+DNSMap
 
 DNS Visualization Tool designed to provide a real-time representation of DNS traffic on a network.
 Information about records accessed will be presented, covering records handed out by the server. Statistics will be displayed about all packets captured during the current capture period.
