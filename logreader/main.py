@@ -1,34 +1,36 @@
 import csv
 import subprocess
+import os
 import re
 from time import sleep
-from dnsconf import LOGGING_FILE
+from dnsconf import QUERY_LOG_FILE as LOGGING_FILE
 from dnsconf import SLEEP_TIMER
 from dnsconf import LOG_REGEX
 
-
-
-
-BIND_MONTHS_DICT = {
-    "Jan" : 1,
-    "Feb" : 2,
-    "Mar" : 3,
-    "Apr" : 4,
-    "May" : 5,
-    "Jun" : 6,
-    "Jul" : 7,
-    "Aug" : 8,
-    "Sep" : 9,
-    "Oct" : 10,
-    "Nov" : 11,
-    "Dec" : 12
-}
+"""Known constraints: This WILL NOT work for very large files
+   I'm also making some guesses about the log file and what's imortant"""
+"""
+Takes: A filename of a file to read
+Returns: An array of arrays of parsed data
+Destroys the file to save space because query logs can blow up quickly
+"""
+def parseFile(fileName):
+    lines = ""
+    with open(LOGGING_FILE, "r+") as logFile:
+        lines = logFile.readlines()
+        logFile.truncate()
+    regexExp = re.compile(LOG_REGEX)
+    lines = lines.split["\n"]
+    parsedOutput = []
+    for line in lines:
+       matchObj = re.match(line)
+       parsedLine = []
+       for i in range(0, 7):
+          parsedLine.append(matchObj.group(i))
 
 def main():
-    regexExp = re.compile(LOG_REGEX)
     while(True):
-        tailedLog = subprocess.getoutput("tail " + LOGGING_FILE)
-        print(tailedLog)
+        parseFile(LOGGING_FILE)
         sleep(SLEEP_TIMER)
 
 
