@@ -1,12 +1,19 @@
 QUERY_LOG_FILE = "./thing"
 SLEEP_TIMER = 1
-LOG_REGEX = "(\S{1,3}) (\d{1,2}) (\d{1,2}:\d{1,2}:\d{1,2}) .*: client (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}#\d{1,5}):" \
-            " query: (.*) IN (.*) (\+|\-)(\S{0,3})"#Logs are long
+LOG_REGEX2 = "(\S{1,3}) (\d{1,2}) (\d{1,2}:\d{1,2}:\d{1,2}) .*: client (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}#\d{1,5}):" \
+            " query: (.*) IN (.*) (\+|\-)(\S{0,3})"#Logs are long --- This is an older format ---
+LOG_REGEX = "(\d{1,2})-(\S{1,3})-(\d{1,4}) (\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) client" \
+            " (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}#\d{1,5}) .* query: (.*) IN (.*) (\+|-)(\S{0,3}).*" #---New format ---
+MONTH_NUM = 1 #Index the month is in the capture group
+REGEX_LEN = 9
+TARGET_DIR = "."
+DELIMETER = "/"
 """
 REGEX FORMAT:
 
+DAY
 MONTH
-DATE
+YEAR
 TIME (24 hour, hh:mm:ss)
 CLIENTIP/PORT (xxx.xxx.xxx.xxx#xxxxx)
 REQUESTED NAME
