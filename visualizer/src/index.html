@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
+<head>
+    <script type="text/javascript" src="../Resources/d3js/d3.min.js"></script>
+</head>
 <style>
     graph_body {
         margin: 0;
@@ -12,8 +15,10 @@
     }
 </style>
 <body>
+<p>Test</p>
 <script>
-    d3.csv("C:/Users/Caleb/WebstormProjects/dnsViz/input/cities.csv", function(data) {
+    var sourcedir = "../input/TestInput1.csv"
+    d3.csv(sourcedir, function(data) {
         console.log(data[0]);
 });
 
