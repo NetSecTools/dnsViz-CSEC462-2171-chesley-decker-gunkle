@@ -1,30 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
+
 <head>
     <script type="text/javascript" src="../Resources/d3js/d3.min.js"></script>
 </head>
-<style>
-    graph_body {
-        margin: 0;
-    }
 
-    graph_rect {
-        stroke: #fff;
-        stroke-width: .1px;
-    }
-</style>
+
+
 <body>
 <p>Test</p>
-<script>
-    var sourcedir = "../input/TestInput1.csv"
-    d3.csv(sourcedir, function(data) {
-        console.log(data[0]);
-});
+
+<div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'Map')">Map</button>
+    <button class="tablinks" onclick="openCity(event, 'Statistics')">Statistics</button>
+    <button class="tablinks" onclick="openCity(event, 'Test')">Test</button>
+</div>
+<div id="Map" class="tabcontent">
+    <h3>Map</h3>
+</div>
+
+<div id="Statistics" class="tabcontent">
+    <h3>Statistics</h3>
+    <script>
+        (function(d3) {
+            'use strict';
+
+            var dataset = [
+                { label: 'Test1', count: 10 },
+                { label: 'Test2', count: 20 },
+                { label: 'Test3', count: 30 },
+                { label: 'Test4', count: 40 }
+            ];
+
+            var width = 360;
+            var height = 360;
+            var radius = Math.min(width, height) / 2;
+            var thickness = 80;
+
+            var color = d3.scaleOrdinal(d3.schemeCategory20b);
+
+            var svg = d3.select('#chart')
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height)
+                .append('g')
+                .attr('transform', 'translate(' + (width / 2) +
+                    ',' + (height / 2) + ')');
+
+            var arc = d3.arc()
+                .innerRadius(radius - thickness)
+                .outerRadius(radius);
+
+            var pie = d3.pie()
+                .value(function(d) { return d.count; })
+                .sort(null);
+
+            var path = svg.selectAll('path')
+                .data(pie(dataset))
+                .enter()
+                .append('path')
+                .attr('d', arc)
+                .attr('fill', function(d, i) {
+                    return color(d.data.label);
+                });
+
+        })(window.d3);
+
+    </script>
+</div>
+
+<div id="Test" class="tabcontent">
+    <h3>Test</h3>
+    <p>Test Content</p>
+</div>
+
+<div id="chart">
+    <svg width="360" height="360">
+        <g transform="translate(180,180)">
+            <path d="M0,-180A..." fill="#393b79"></path>
+            <path d="M105.801..." fill="#5254a3"></path>
+            <path d="M171.190..." fill="#6b6ecf"></path>
+            <path d="M-105.80..." fill="#9c9ede"></path>
+        </g>
+    </svg>
+</div>
 
 
-
-
-</script>
 </body>
 </html>
