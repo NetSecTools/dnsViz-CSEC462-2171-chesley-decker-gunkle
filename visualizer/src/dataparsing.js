@@ -1,11 +1,11 @@
 
 
 
-
 /*
 Calculate frequency of DNS queries per source IP
  */
-function generateDonutData(infile) {
+function generateDonutData() {
+    infile = '../input/TestInput1.csv'
     d3.csv(infile, function(csv) {
         var query_count = {};
         var srcIP;
@@ -25,9 +25,14 @@ function generateDonutData(infile) {
 
         var src_counts = [];
         for (var src in query_count) {
-
+            src_counts.push([src, query_count[src]]);
         }
+
+        src_counts.sort(function(a, b) {
+           return a[1] - b[1];
+        });
+
+        console.log(src_counts);
+        return src_counts;
     });
-
-
 }
