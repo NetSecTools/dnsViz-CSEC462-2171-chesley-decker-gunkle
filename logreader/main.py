@@ -46,8 +46,9 @@ def main():
     counter = 0
     while(True):
         contents = parseFile(LOGGING_FILE)
-        writeFile(contents, "dnsVis"+str(counter), TARGET_DIR)
-        counter += 1
+        if contents != "":
+            writeFile(contents, "dnsVis"+str(counter), TARGET_DIR)
+            counter += 1
         sleep(SLEEP_TIMER)
 
 
