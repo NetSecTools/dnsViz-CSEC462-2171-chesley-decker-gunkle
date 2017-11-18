@@ -2,7 +2,7 @@
 
 
 function getStatistics() {
-    var input_filepath = '../input/TestInput1.csv'
+    var input_filepath = '../input/TestInput1.csv';
     var source_frequency = generateSourceIPData(input_filepath);
     var query_freqency = generateQueryData(input_filepath);
 }
@@ -35,17 +35,12 @@ function generateSourceIPData(infile) {
         var querySorted = [];
         for (var q in queryCount) {
             querySorted.push([q, queryCount[q]]);
-            var outstring = 'Pushing: ' + q + ' ' + queryCount[q];
-            //console.log(outstring);
         }
 
         querySorted.sort(function(a, b) {
             return b[1] - a[1];
         });
 
-        for (var i = 0; i < data.length; i++) { //debug
-            console.log(querySorted[i]);
-        }
         return querySorted;
     });
 }
@@ -59,7 +54,7 @@ function generateQueryData(infile) {
         var queryCount = {};
         var query;
         var row;
-        for (var i = 0; i < data.length; i++) {
+        for (i = 0; i < data.length; i++) {
             row = data[i];
             query = row[5];
             if (queryCount.hasOwnProperty(query)) {
@@ -72,8 +67,6 @@ function generateQueryData(infile) {
         var querySorted = [];
         for (var q in queryCount) {
             querySorted.push([q, queryCount[q]]);
-            var outstring = 'Pushing: ' + q + ' ' + queryCount[q];
-            //console.log(outstring);
         }
 
         querySorted.sort(function(a, b) {
