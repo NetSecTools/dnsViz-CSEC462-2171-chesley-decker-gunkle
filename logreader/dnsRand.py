@@ -1,7 +1,8 @@
 import random
 
-fileToOpen = "./thing2"
+fileToOpen = "./thing"
 
+"""This file was just used to quickly make random IP addresses and is not part of the general tool"""
 
 def main():
     with open (fileToOpen, "r+") as f:
@@ -9,8 +10,10 @@ def main():
         f.truncate(0)
         for line in lines:
             splitLine = line.split()
-            splitIP = splitLine[3].split("#")[0]
-            splitNums = splitIP.split(".")
+            print(splitLine)
+            splitIP = splitLine[3].split("#")
+            print(splitIP)
+            splitNums = splitIP[0].split(".")
             splitNums[0] = random.randint(11, 255)
             while (splitNums[0] == 127 or splitNums[0] == 10):
                 splitNums[0] = random.randint(11,255)
@@ -27,9 +30,10 @@ def main():
                     newIP += str(splitNums[i])
                     if i < 3:
                         newIP += "."
-                assembledLine += newIP + " "
+                assembledLine += newIP + "#" + splitIP[1] + " "
             print(assembledLine)
             assembledLine += "\n"
             f.write(assembledLine)
 
-main()
+if __name__ == "__main__":
+    main()
