@@ -8,12 +8,11 @@ function createMap() {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
         '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © ' +
         '<a href="http://mapbox.com">Mapbox</a>',
-        maxZoom: 15,
+        maxZoom: 2,
         minZoom: 2,
         id: 'mapbox.dark',
         accessToken: 'pk.eyJ1IjoiY2NoZXNsZXkyMzk3IiwiYSI6ImNqYTR4endzNTMxY2sycXFyemduaXIxM3EifQ.gvT6NeQ0Q6ykY8PVzMhTTw'
     }).addTo(Map);
-    Map.invalidateSize(true);
     return Map;
 }
 

@@ -1,9 +1,9 @@
 DNSMap
 
-DNS Visualization Tool designed to provide a real-time representation of DNS traffic on a network.
+DNS Visualization Tool designed to provide a representation of DNS traffic on a network.
 Information about records accessed will be presented, covering records handed out by the server. Statistics will be displayed about all packets captured during the current capture period.
 Information about requests and reponses outside of the host network will be presented on a map, giving a geographic representation of the location of addresses being resolved by the tool.
-Additonally, failed DNSSec validations will be recorded and displayed.
+
 
 
 
@@ -11,13 +11,10 @@ Prerequisites
 
 bind9
 
-TODO
-What things you need to install DNSViz and how to install them
-
 
 Installation
 
-TODO - Install guide
+Install guide
 To use the logreader to create csv's, change the file location in "logreader/dnsconf.py"
 
 If you would like to keep your query logs, make sure this is pointed at a copy of your logs because it will destroy the logs in order to keep log size down
@@ -29,7 +26,9 @@ LOCATION\_URL is the designated api to reach out to for location data. If desire
 Built With
 
 TODO - Add tools used 
-
+D3.js - d3js.org
+Leaflet - leafletjs.com
+Mapbox - mapbox.com
 
 Versioning
 

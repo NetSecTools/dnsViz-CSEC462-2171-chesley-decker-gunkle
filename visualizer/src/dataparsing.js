@@ -79,3 +79,4 @@ function generateQueryData(infile) {
         return querySorted;
     });
 }
+

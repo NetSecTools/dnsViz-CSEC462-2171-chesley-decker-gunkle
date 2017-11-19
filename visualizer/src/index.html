@@ -14,7 +14,7 @@ Mapbox.com
 <head>
     DNS Map
 
-    <link rel="stylesheet" href="tabstyle.css"/>
+    <!-- <link rel="stylesheet" href="tabstyle.css"/> -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
           integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
           crossorigin=""/>
@@ -31,11 +31,7 @@ Mapbox.com
             crossorigin=""></script>
 
 
-
-
 </head>
-
-
 
 <body>
 
@@ -70,7 +66,29 @@ Mapbox.com
 
 <div id="Map">
     <script type="text/javascript">
-        createMap();
+        // config variables //
+        var sourceFile = "../TestInputLocations.csv";
+        var DNSServerLat = 43.0812766;
+        var DNSServerLong = -77.67518760000002;
+        // config variables //
+
+        var Map = L.map('Map').setView([0, 0], 2);
+
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+            '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © ' +
+            '<a href="http://mapbox.com">Mapbox</a>',
+            maxZoom: 2,
+            minZoom: 2,
+            id: 'mapbox.dark',
+            accessToken: 'pk.eyJ1IjoiY2NoZXNsZXkyMzk3IiwiYSI6ImNqYTR4endzNTMxY2sycXFyemduaXIxM3EifQ.gvT6NeQ0Q6ykY8PVzMhTTw'
+        }).addTo(Map);
+
+
+        var DNSServerCircle = L.circleMarker(DNSServerLat, DNSServerLong, 100000000000).addTo(Map);
+
+
+
     </script>
 </div>
 
