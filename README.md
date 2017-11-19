@@ -42,7 +42,9 @@ Mapbox - mapbox.com
 Authors
 
 Caleb Chesley - csc1918@rit.edu
+
 Liam Decker - wgd6034@rit.edu
+
 Andrew Gunkle - arg5173@rit.edu
 
 
