@@ -1,6 +1,18 @@
 
 
 
+function openMap(event, contentName) {
+    openContent(event, contentName);
+    var map = document.getElementById('Map');
+    map.invalidateSize(true);
+}
+
+function checkMapDisplay() {
+    var div = document.getElementById('Map');
+    if (div.style.display === "none") {
+
+    }
+}
 
 function openContent(event, contentName) {
     var i;              // counter
@@ -24,3 +36,4 @@ function openContent(event, contentName) {
     document.getElementById(contentName).style.display = "block";
     event.currentTarget.className += " active";
 }
+
