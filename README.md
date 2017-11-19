@@ -7,16 +7,17 @@ Information about requests and reponses outside of the host network will be pres
 giving a geographic representation of the location of addresses being resolved by the tool.
 
 
-
-
 Prerequisites
 
 bind9
+
+Python 3.5 or higher
 
 
 Installation
 
 Logreader
+
 To use the logreader to create csv's, change the file location in "logreader/dnsconf.py"
 
 If you would like to keep your query logs, make sure this is pointed at a copy of your logs because it will destroy the logs in order to keep log size down
@@ -30,25 +31,28 @@ Visualizer
 The visualizer requires an initial internet connection for use unless manually reconfigured with local resources.
 "index.html" includes a "// config variables //" field, which dictates the Latitude and Longitude of the DNS server,
 and the source CSV to retrieve queries from.
+
 CSV Format:
 Day,Month,Year,Timestamp,SourceIP#SourcePort,query,Record Type,+,E,region,Region Name,Country,Country Code, Lat,Lon
 
 
-Built With (Resource - Website - Use):
-IP API - ip-api.com - Location resolution for IP addresses
-D3.js - d3js.org - Visualizer construction
-Leaflet - leafletjs.com - Map function and geographic data visualization
-Canvasjs - canvasjs.com - Statistics and charts
-Mapbox - mapbox.com - Map tiles for Leaflet
-    Accessing Mapbox map tiles requires an access key based on Mapbox tiers of service.
-    The lowest tier is free.
-    Enter the site and create an account for a limited key.
+Built With
+
+D3.js - d3js.org
+
+Leaflet - leafletjs.com
+
+Mapbox - mapbox.com
+
+
 
 Authors
 
 Caleb Chesley - csc1918@rit.edu
-Liam Decker
-Andrew Gunkle
+
+Liam Decker - wgd6034@rit.edu
+
+Andrew Gunkle - arg5173@rit.edu
 
 
 License
