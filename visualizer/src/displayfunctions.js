@@ -1,19 +1,9 @@
 
 
 
-function openMap(event, contentName) {
-    openContent(event, contentName);
-    var map = document.getElementById('Map');
-    map.invalidateSize(true);
-}
-
-function checkMapDisplay() {
-    var div = document.getElementById('Map');
-    if (div.style.display === "none") {
-
-    }
-}
-
+/* Hide all tab content and display currently clicked tab
+Parameters: contentName, element to display
+ */
 function openContent(event, contentName) {
     var i;              // counter
     var tabcontent;

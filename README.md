@@ -34,12 +34,15 @@ CSV Format:
 Day,Month,Year,Timestamp,SourceIP#SourcePort,query,Record Type,+,E,region,Region Name,Country,Country Code, Lat,Lon
 
 
-Built With
-
-D3.js - d3js.org
-Leaflet - leafletjs.com
-Mapbox - mapbox.com
-
+Built With (Resource - Website - Use):
+IP API - ip-api.com - Location resolution for IP addresses
+D3.js - d3js.org - Visualizer construction
+Leaflet - leafletjs.com - Map function and geographic data visualization
+Canvasjs - canvasjs.com - Statistics and charts
+Mapbox - mapbox.com - Map tiles for Leaflet
+    Accessing Mapbox map tiles requires an access key based on Mapbox tiers of service.
+    The lowest tier is free.
+    Enter the site and create an account for a limited key.
 
 Authors
 

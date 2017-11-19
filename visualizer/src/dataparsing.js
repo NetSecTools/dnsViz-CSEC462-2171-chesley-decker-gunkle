@@ -1,22 +1,12 @@
 
 
 
-function getStatistics() {
-    var input_filepath = '../input/TestInput1.csv';
-    var source_frequency = generateSourceIPData(input_filepath);
-    var query_freqency = generateQueryData(input_filepath);
-}
-
-
-
-
-
-
-/*
-Calculate frequency of DNS queries per source IP
+/* Get frequency of source IPs
+Parameters: filename of csv to process
+Return: Sorted array of source and frequency pairs
  */
 function generateSourceIPData(infile) {
-    d3.text(infile, function(toParse) {
+    return d3.text(infile, function(toParse) {
         var data = d3.csvParseRows(toParse);
 
         var queryCount = {};
@@ -46,9 +36,12 @@ function generateSourceIPData(infile) {
 }
 
 
-
+/* Get frequency of queries
+Parameters: filename of csv to process
+Return: Sorted array of query and frequency pairs
+ */
 function generateQueryData(infile) {
-    d3.text(infile, function(toParse) {
+    return d3.text(infile, function(toParse) {
         var data = d3.csvParseRows(toParse);
 
         var queryCount = {};
@@ -64,6 +57,8 @@ function generateQueryData(infile) {
                 queryCount[query] = 1;
             }
         }
+
+
         var querySorted = [];
         for (var q in queryCount) {
             querySorted.push([q, queryCount[q]]);
@@ -73,10 +68,10 @@ function generateQueryData(infile) {
             return b[1] - a[1];
         });
 
-        for (var i = 0; i < data.length; i++) { //debug
-            console.log(querySorted[i]);
-        }
+
+
         return querySorted;
     });
+
 }
 
