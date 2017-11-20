@@ -9,14 +9,24 @@ Mapbox.com
 -->
 
 <style>
+    html, body {
+        font-family: "Source Sans Pro", "Helvetica Neue", sans-serif;
+    }
     .bar {
         fill: blue;
+    }
+    div#leafletMap {
+        margin: auto;
+    }
+    div#chart {
+    height: 400px;
+        width: 75%;
+        margin: auto;
     }
 </style>
 
 
 <head>
-    DNS Map
 
     <!-- <link rel="stylesheet" href="tabstyle.css"/> -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
@@ -25,11 +35,11 @@ Mapbox.com
     <link rel="stylesheet" href="mapstyle.css"/>
 
     <!--<link href='//mapbox.com/base/latest/base.css' rel='stylesheet' /> -->
-
-    <script src="queryChart.js" type="text/javascript"></script>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-    <script src="http://d3js.org/d3.v4.min.js" type="text/javascript"></script>
+    <script src="https://github.com/mholt/PapaParse/blob/master/papaparse.min.js" type="text/javascript"></script>
     <script src="dataparsing.js" type="text/javascript"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="queryChart.js" type="text/javascript"></script>
+    <script src="http://d3js.org/d3.v4.min.js" type="text/javascript"></script>
     <script src="querymap.js" type="text/javascript"></script>
     <script src="displayfunctions.js" type="text/javascript"></script>
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
@@ -41,7 +51,7 @@ Mapbox.com
 
 <body>
 
-
+<h1>DNS Map</h1>
 
 
 <!-- TAB FEATURES, WIP
@@ -70,22 +80,26 @@ Mapbox.com
 </div>
 -->
 
-<div id="Map"></div>
+<div id="Map" class="leafletMap"></div>
 
-<div id="queryChartContainer" style="height: 400px; width: 75%; margin: auto;"></div>
+<div id="queryChartContainer" class="chart"></div>
 
-<div id="sourceChartContainer" style="height: 400px; width: 400px; margin: auto;"></div>
+<div id="sourceChartContainer" class="chart"></div>
 
     <script type="text/javascript">
         // config variables //
-        var sourceFile = "../input/TestInputLocations.csv";
+        var sourceFile = "../../input/ExampleInput.csv";
         var DNSServerLat = 43;
         var DNSServerLong = -77;
         // config variables //
 
+        // latLng object with DNS server coordinates
         var DNSServerCoords = L.latLng(DNSServerLat,DNSServerLong);
+
+        // Create map
         var Map = L.map("Map").setView([0, 0], 2);
 
+        // Retrieve map tile from mapbox
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
             '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © ' +
@@ -96,6 +110,7 @@ Mapbox.com
             accessToken: 'pk.eyJ1IjoiY2NoZXNsZXkyMzk3IiwiYSI6ImNqYTR4endzNTMxY2sycXFyemduaXIxM3EifQ.gvT6NeQ0Q6ykY8PVzMhTTw'
         }).addTo(Map);
 
+        // Options for DNS server map marker
         var serverMarkerOptions = {
             radius: 13,
             fillColor: "#42e5f4",
@@ -105,6 +120,7 @@ Mapbox.com
             fillOpacity: 0.8
         };
 
+        // Options for query source markers
         var queryMarkerOptions = {
             radius: 7,
             fillColor: "#00c153",
