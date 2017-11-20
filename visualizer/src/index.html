@@ -11,18 +11,30 @@ Mapbox.com
 <style>
     html, body {
         font-family: "Source Sans Pro", "Helvetica Neue", sans-serif;
+        margin-right: 10%;
+        margin-left: 10%;
+        background-color: #2d2d2d;
     }
-    .bar {
-        fill: blue;
+
+    div {
+        border: 20px white;
     }
-    div#leafletMap {
-        margin: auto;
+    .leafletMap {
+        width: 1000px;
+        height: 700px;
+        position: relative;
+        margin: 10%;
     }
-    div#chart {
-    height: 400px;
+
+    .chart {
+        height: 400px;
         width: 75%;
-        margin: auto;
+        margin-right: 10%;
+        margin-left: 10%;
+        margin-top: 100px;
+        margin-bottom: 100px;
     }
+
 </style>
 
 
@@ -32,13 +44,12 @@ Mapbox.com
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
           integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
           crossorigin=""/>
-    <link rel="stylesheet" href="mapstyle.css"/>
+
 
     <!--<link href='//mapbox.com/base/latest/base.css' rel='stylesheet' /> -->
-    <script src="https://github.com/mholt/PapaParse/blob/master/papaparse.min.js" type="text/javascript"></script>
     <script src="dataparsing.js" type="text/javascript"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-    <script src="queryChart.js" type="text/javascript"></script>
+    <script src="createChart.js" type="text/javascript"></script>
     <script src="http://d3js.org/d3.v4.min.js" type="text/javascript"></script>
     <script src="querymap.js" type="text/javascript"></script>
     <script src="displayfunctions.js" type="text/javascript"></script>
@@ -80,11 +91,13 @@ Mapbox.com
 </div>
 -->
 
+
 <div id="Map" class="leafletMap"></div>
 
 <div id="queryChartContainer" class="chart"></div>
 
 <div id="sourceChartContainer" class="chart"></div>
+
 
     <script type="text/javascript">
         // config variables //
@@ -173,6 +186,7 @@ Mapbox.com
 
 
         qChart = createQueryChart(sourceFile);
+        sChart = createSourceChart(sourceFile);
 
     </script>
 

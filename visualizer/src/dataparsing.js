@@ -11,10 +11,15 @@ function generateSourceIPData(infile) {
 
         var queryCount = {};
         var srcIP;
+        var srcAndPort;
         var row;
         for (var i = 0; i < data.length; i++) {
             row = data[i];
-            srcIP = row[5];
+            srcAndPort = row[5];
+            srcAndPort = srcAndPort.split("#");
+            console.log(srcAndPort[0]);
+            console.log(srcAndPort[1]);
+
             if (queryCount.hasOwnProperty(srcIP)) {
                 queryCount[srcIP]++;
             }
@@ -43,7 +48,8 @@ Return: Sorted array of query and frequency pairs
 function generateQueryData(infile) {
     var sortedList = [];
     d3.text(infile, function(toParse) {
-        var data = d3.csvParseRows(toParse);
+
+        var data = d3.csvParseRows(infile);
 
         var queryCount = {};
         var query;
@@ -69,10 +75,8 @@ function generateQueryData(infile) {
             return b[1] - a[1];
         });
 
-        console.log(querySorted);
         sortedList = querySorted;
     });
-    console.log(sortedList);
     return sortedList;
 }
 
