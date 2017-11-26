@@ -25,7 +25,6 @@ Mapbox.com
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script src="createChart.js" type="text/javascript"></script>
     <script src="http://d3js.org/d3.v4.min.js" type="text/javascript"></script>
-    <script src="querymap.js" type="text/javascript"></script>
     <script src="displayfunctions.js" type="text/javascript"></script>
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
             integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
@@ -78,7 +77,7 @@ Mapbox.com
     var sourceFile = "../../input/ExampleInput.csv";
     // config variables //
 
-    d3.text(sourceFile, function(text) {
+    d3.text(sourceFile, function(text) {    // read CSV file
         // config variables //
         var DNSServerLat = 43;
         var DNSServerLong = -77;
@@ -140,7 +139,7 @@ Mapbox.com
             validation = row[15];
 
             validationColor = "#00c153";
-            if (validation === "fail") {
+            if (validation === "fail") {        // Check if requested DNSSec was invalid
                 validationColor = "#c10a00";
             }
             var queryMarkerOptions = {
@@ -160,7 +159,7 @@ Mapbox.com
                 "Country: " + country + "<br>" +
                 queryCoords + "<br>";
 
-
+            // add new circle marker for query to queryMarkers list
             queryMarkers.push(new L.circleMarker(queryCoords, queryMarkerOptions)
                 .bindTooltip(toolTip)
                 .addTo(Map));
@@ -169,9 +168,11 @@ Mapbox.com
             var pointList = [pointA, pointB];
 
             validationColor = "#42e5f4";
-            if (validation === "fail") {
+            if (validation === "fail") {    // check if requested DNSSec was invalid
                 validationColor = "#c10a00";
             }
+
+            //  Add new polyline linking source and DNS server
             queryLines.push(new L.polyline(pointList, {
                 color: validationColor,
                 weight: 3,
@@ -184,9 +185,9 @@ Mapbox.com
         var DNSServerCircle = L.circleMarker(DNSServerCoords, serverMarkerOptions).addTo(Map).bindPopup("DNS Server");
 
 
-        var qChart = createQueryChart(data);
-        var sChart = createSourceChart(data);
-        Map.invalidateSize(true);
+        var qChart = createQueryChart(data);    // create chart with frequency of each query
+        var sChart = createSourceChart(data);   // create chart with frequency of each source IP
+        Map.invalidateSize(true);               // resize map
     });
 </script>
 

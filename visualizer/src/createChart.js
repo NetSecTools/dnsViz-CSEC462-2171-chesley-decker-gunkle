@@ -1,12 +1,14 @@
 
 
 
-
+/*
+Create Canvas chart showing each query by frequency
+ */
 function createQueryChart(data) {
     var queryCount = {};
     var query;
     var row;
-    for (var i = 0; i < data.length; i++) {
+    for (var i = 0; i < data.length; i++) {     // Count frequency of each query
         row = data[i];
         query = row[5];
         if (queryCount.hasOwnProperty(query)) {
@@ -22,7 +24,7 @@ function createQueryChart(data) {
         querySorted.push([q, queryCount[q]]);
     }
 
-    querySorted.sort(function(a, b) {
+    querySorted.sort(function(a, b) {       // sort by frequency, descending
         return b[1] - a[1];
     });
 
@@ -33,7 +35,7 @@ function createQueryChart(data) {
         queryDataPoints.push({label: queryData[i][0], y: queryData[i][1]});
 
     }
-    var queryChart = new CanvasJS.Chart("queryChartContainer", {
+    var queryChart = new CanvasJS.Chart("queryChartContainer", {        // create chart
         animationEnabled: true,
 
         title: {
@@ -52,13 +54,15 @@ function createQueryChart(data) {
 
 
 
-
+/*
+Create Canvas chart showing each source IP by frequency
+ */
 function createSourceChart(data) {
     var queryCount = {};
     var srcIP;
     var srcAndPort;
     var row;
-    for (var i = 0; i < data.length; i++) {
+    for (var i = 0; i < data.length; i++) {     // count frequency of each IP
         row = data[i];
         srcAndPort = row[4];
         srcAndPort = srcAndPort.split("#");

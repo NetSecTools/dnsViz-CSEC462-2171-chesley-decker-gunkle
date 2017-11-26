@@ -1,3 +1,5 @@
+# Generate random IP addresses for testing
+
 import random
 
 fileToOpen = "./thing"
