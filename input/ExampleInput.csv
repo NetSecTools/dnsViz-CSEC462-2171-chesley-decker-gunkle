@@ -1,17 +1,17 @@
-27,10,2017,47:57.3,147.193.13.43#50143,liamdecker.com,NS,+,E,ENG,England,United Kingdom,GB,53.3333,-2.75,pass
-27,10,2017,50:03.8,223.121.46.176#46930,liamdecker.com,NS,+,E,11,Beijing Shi,China,CN,39.9118,116.359,pass
-27,10,2017,50:13.4,196.104.56.26#58624,liamdecker.com,SOA,+,E,110,Nairobi Province,Kenya,KE,-1.26822,36.8055,pass
-27,10,2017,51:16.8,49.59.252.196#39569,liamdecker.com,SOA,+,E,41,Gyeonggi-do,Republic of Korea,KR,37.3827,127.119,fail
-27,10,2017,51:43.5,34.3.105.87#35617,liamdecker.com,SOA,+,E,TX,Texas,United States,US,29.9387,-95.34,pass
-27,10,2017,53:06.8,31.57.147.30#36079,liamdecker.com,SOA,+,E,,Tehrān,Iran,IR,35.6892,51.389,pass
-27,10,2017,17:42.5,153.177.172.214#45860,1.client-channel.google.com,A,+,,27,Ōsaka,Japan,JP,34.6864,135.52,pass
-27,10,2017,17:42.5,83.245.79.117#56288,1.client-channel.google.com,A,+,,,England,United Kingdom,GB,51.411,-0.676674,pass
-27,10,2017,17:42.5,98.135.53.240#41545,1.client-channel.google.com,A,+,,NE,Nebraska,United States,US,41.2671,-96.0801,pass
-27,10,2017,17:42.5,13.104.136.158#46026,1.client-channel.google.com,A,+,,WA,Washington,United States,US,47.6801,-122.1206,pass
-27,10,2017,17:43.5,175.150.148.76#53876,1.client-channel.google.com,A,+,,21,Liaoning,China,CN,41.1167,122.05,fail
-27,10,2017,17:43.5,82.157.133.1#58031,1.client-channel.google.com,A,+,,NH,North Holland,Netherlands,NL,52.3675,4.918,fail
-27,10,2017,17:43.5,67.176.232.83#54887,1.client-channel.google.com,A,+,,IL,Illinois,United States,US,42.0624,-87.9309,pass
-27,10,2017,17:43.5,52.171.14.92#39284,1.client-channel.google.com,A,+,,TX,Texas,United States,US,29.4241,-98.4936,pass
-27,10,2017,21:08.6,72.15.133.199#57938,clients6.google.com,A,+,,ON,Ontario,Canada,CA,43.9668,-79.2496,pass
-27,10,2017,21:08.6,185.16.6.7#58356,clients6.google.com,A,+,,KU,Al Asimah,Kuwait,KW,29.3697,47.9783,pass
-30,10,2017,10:16.7,166.66.230.210#51000,a.wunderlist.com,A,+,,PA,Pennsylvania,United States,US,39.9811,-76.3784,fail
+27,10,2017,16:47:57.3,147.193.13.43#50143,liamdecker.com,NS,+,E,ENG,England,United Kingdom,GB,53.3333,-2.75,pass
+27,10,2017,16:50:03.8,223.121.46.176#46930,liamdecker.com,NS,+,E,11,Beijing Shi,China,CN,39.9118,116.359,pass
+27,10,2017,16:50:13.4,196.104.56.26#58624,liamdecker.com,SOA,+,E,110,Nairobi Province,Kenya,KE,-1.26822,36.8055,pass
+27,10,2017,16:51:16.8,49.59.252.196#39569,liamdecker.com,SOA,+,E,41,Gyeonggi-do,Republic of Korea,KR,37.3827,127.119,fail
+27,10,2017,16:51:43.5,34.3.105.87#35617,liamdecker.com,SOA,+,E,TX,Texas,United States,US,29.9387,-95.34,pass
+27,10,2017,16:53:06.8,31.57.147.30#36079,liamdecker.com,SOA,+,E,,Tehrān,Iran,IR,35.6892,51.389,pass
+27,10,2017,17:17:42.5,153.177.172.214#45860,1.client-channel.google.com,A,+,,27,Ōsaka,Japan,JP,34.6864,135.52,pass
+27,10,2017,17:17:42.5,83.245.79.117#56288,1.client-channel.google.com,A,+,,,England,United Kingdom,GB,51.411,-0.676674,pass
+27,10,2017,17:17:42.5,98.135.53.240#41545,1.client-channel.google.com,A,+,,NE,Nebraska,United States,US,41.2671,-96.0801,pass
+27,10,2017,17:17:42.5,13.104.136.158#46026,1.client-channel.google.com,A,+,,WA,Washington,United States,US,47.6801,-122.1206,pass
+27,10,2017,17:17:43.5,175.150.148.76#53876,1.client-channel.google.com,A,+,,21,Liaoning,China,CN,41.1167,122.05,fail
+27,10,2017,17:17:43.5,82.157.133.1#58031,1.client-channel.google.com,A,+,,NH,North Holland,Netherlands,NL,52.3675,4.918,fail
+27,10,2017,17:17:43.5,67.176.232.83#54887,1.client-channel.google.com,A,+,,IL,Illinois,United States,US,42.0624,-87.9309,pass
+27,10,2017,17:17:43.5,52.171.14.92#39284,1.client-channel.google.com,A,+,,TX,Texas,United States,US,29.4241,-98.4936,pass
+27,10,2017,17:21:08.6,72.15.133.199#57938,clients6.google.com,A,+,,ON,Ontario,Canada,CA,43.9668,-79.2496,pass
+27,10,2017,17:21:08.615,185.16.6.7#58356,clients6.google.com,A,+,,KU,Al Asimah,Kuwait,KW,29.3697,47.9783,pass
+30,10,2017,18:10:16.735,166.66.230.210#51000,a.wunderlist.com,A,+,,PA,Pennsylvania,United States,US,39.9811,-76.3784,fail
