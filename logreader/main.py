@@ -1,6 +1,7 @@
 import csv
 import re
 import requests
+import os
 from time import sleep
 from dnsconf import QUERY_LOG_FILE as LOGGING_FILE
 from dnsconf import LOCATION_FILE
@@ -13,6 +14,8 @@ from dnsconf import IP_NUM
 from dnsconf import REGEX_LEN
 from dnsconf import TARGET_DIR
 from dnsconf import DELIMETER
+from dnsconf import REQ_NAME
+from dnsconf import FLAGS
 
 """Known constraints: This WILL NOT work for very large files
    I'm also making some guesses about the log file and what's important
@@ -44,9 +47,14 @@ def parseFile(fileName):
         parsedLine[MONTH_NUM] = BIND_MONTHS_DICT[parsedLine[MONTH_NUM].lower()] #Change the Month to a Number
         try:
             location = findLocation(parsedLine[IP_NUM])
+            if "D" in parsedLine[FLAGS]: #Only check DNSSEC validation if query requests it
+                validation = dnssecCheck(parsedLine[REQ_NAME])
+            else:
+                validation = "pass" #Default to pass
         except:
             continue
         parsedLine.extend(location)
+        parsedLine.append(validation)
         parsedOutput.append(parsedLine)
         counter += 1
         if counter == 100: #This is only necessary because of the rate limiting, will truncate anything over 100 lines
@@ -69,9 +77,14 @@ def findLocation(IP):
    data = response.json()
    return [data['region'], data['regionName'], data['country'], data['countryCode'], data['lat'], data['lon']]
 
+def dnssecCheck (NAME):
+    output = os.popen("dig +noall +comments +dnssec example.com| grep status").read()
+    if "SERVFAIL" in output:
+        return "fail"
+    else:
+        return "pass"
 
-
-
+		
 def main():
     counter = 0
     while(True):
