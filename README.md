@@ -16,7 +16,7 @@ Andrew Gunkle - arg5173@rit.edu - DNSSec validation and repository maintenance
 ##Prerequisites
 bind9
 Python 3.5 or higher
-
+An internet connection for visualization
 
 ##Installation
 ###Logreader

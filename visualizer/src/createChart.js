@@ -37,7 +37,7 @@ function createQueryChart(data) {
         animationEnabled: true,
 
         title: {
-            text: "Top 10 queries by frequency of query"
+            text: "Queries by frequency of query"
         },
         data: [{
             type: "column", //change type to bar, line, area, pie, etc
@@ -90,7 +90,7 @@ function createSourceChart(data) {
         animationEnabled: true,
 
         title: {
-            text: "Top 10 sources by frequency of request"
+            text: "Sources by frequency of request"
         },
         data: [{
             type: "column", //change type to bar, line, area, pie, etc

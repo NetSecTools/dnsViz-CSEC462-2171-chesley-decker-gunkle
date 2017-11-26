@@ -130,16 +130,19 @@ Mapbox.com
         var query;
         var country;
         var source;
+        var validation;
         var validationColor;    // Red if DNSsec failed for query, green otherwise
         for (var i = 0; i < data.length; i++) {
             row = data[i];
             source = row[4];
             query = row[5];
             country = row[11];
-
+            validation = row[15];
 
             validationColor = "#00c153";
-
+            if (validation === "fail") {
+                validationColor = "#c10a00";
+            }
             var queryMarkerOptions = {
                 radius: 7,
                 fillColor: validationColor,
@@ -164,8 +167,11 @@ Mapbox.com
             var pointA = queryCoords;
             var pointB = DNSServerCoords;
             var pointList = [pointA, pointB];
-            validationColor = "#42e5f4";
 
+            validationColor = "#42e5f4";
+            if (validation === "fail") {
+                validationColor = "#c10a00";
+            }
             queryLines.push(new L.polyline(pointList, {
                 color: validationColor,
                 weight: 3,
