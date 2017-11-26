@@ -123,25 +123,31 @@ Mapbox.com
         };
 
         // Options for query source markers
-        var queryMarkerOptions = {
-            radius: 7,
-            fillColor: "#00c153",
-            color: 'black',
-            weight: 1,
-            opacity: .5,
-            fillOpacity: 0.5
-        };
+
 
         var row;
         var queryCoords;
         var query;
         var country;
         var source;
+        var validationColor;    // Red if DNSsec failed for query, green otherwise
         for (var i = 0; i < data.length; i++) {
             row = data[i];
             source = row[4];
             query = row[5];
             country = row[11];
+
+
+            validationColor = "#00c153";
+
+            var queryMarkerOptions = {
+                radius: 7,
+                fillColor: validationColor,
+                color: 'black',
+                weight: 1,
+                opacity: .5,
+                fillOpacity: 0.5
+            };
 
             queryCoords = L.latLng(row[13], row[14]);
 
@@ -158,8 +164,10 @@ Mapbox.com
             var pointA = queryCoords;
             var pointB = DNSServerCoords;
             var pointList = [pointA, pointB];
+            validationColor = "#42e5f4";
+
             queryLines.push(new L.polyline(pointList, {
-                color: "#42e5f4",
+                color: validationColor,
                 weight: 3,
                 opacity: 0.5,
                 smoothFactor: 1
