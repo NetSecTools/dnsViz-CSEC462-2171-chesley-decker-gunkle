@@ -13,9 +13,12 @@ def main():
         for line in lines:
             splitLine = line.split()
             print(splitLine)
-            splitIP = splitLine[3].split("#")
+            splitIP = splitLine[3].split("#")[0]
+            portNum = splitLine[3][0].split("#")[0]
+            if portNum == "" or int(portNum) < 10:
+                portNum = random.randint(10000, 65534)
             print(splitIP)
-            splitNums = splitIP[0].split(".")
+            splitNums = splitIP.split(".")
             splitNums[0] = random.randint(11, 255)
             while (splitNums[0] == 127 or splitNums[0] == 10):
                 splitNums[0] = random.randint(11,255)
@@ -32,7 +35,7 @@ def main():
                     newIP += str(splitNums[i])
                     if i < 3:
                         newIP += "."
-                assembledLine += newIP + "#" + splitIP[1] + " "
+                assembledLine += (newIP + "#" + str(portNum) + " ")
             print(assembledLine)
             assembledLine += "\n"
             f.write(assembledLine)

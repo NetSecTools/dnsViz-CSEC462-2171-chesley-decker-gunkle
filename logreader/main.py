@@ -22,8 +22,6 @@ from dnsconf import FLAGS
    
    Due to rate limiting, I cannot parse more than 100 locations/min without
    paying for a higher tier"""
-
-
 """
 Takes: A filename of a file to read
 Returns: An array of arrays of parsed data
@@ -60,7 +58,6 @@ def parseFile(fileName):
         if counter == 100: #This is only necessary because of the rate limiting, will truncate anything over 100 lines
             break           #These can be removed if the rate limiting is gone
     for line in parsedOutput:
-        print(line)
     return parsedOutput
 
 def writeFile(contents, fileName, fileLocation):
@@ -94,6 +91,7 @@ def main():
             continue
         if contents != []:
             writeFile(contents, "dnsVis"+str(counter), TARGET_DIR)
+            print("Wrote file:" + "dnsVis"+str(counter))
             counter += 1
         sleep(SLEEP_TIMER)
 
