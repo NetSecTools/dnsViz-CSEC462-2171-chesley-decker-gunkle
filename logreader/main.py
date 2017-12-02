@@ -57,7 +57,6 @@ def parseFile(fileName):
         counter += 1
         if counter == 100: #This is only necessary because of the rate limiting, will truncate anything over 100 lines
             break           #These can be removed if the rate limiting is gone
-    for line in parsedOutput:
     return parsedOutput
 
 def writeFile(contents, fileName, fileLocation):
