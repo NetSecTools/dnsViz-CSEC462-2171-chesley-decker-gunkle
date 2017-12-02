@@ -21,3 +21,13 @@ div#Map.leafletMap {
     margin-left: 10%;
     margin-bottom: 100px;
 }
+
+input[type=text] {
+        width: 130px;
+        -webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 75%;
+}

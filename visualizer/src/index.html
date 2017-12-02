@@ -22,6 +22,8 @@ Mapbox.com
 
 
     <!--<link href='//mapbox.com/base/latest/base.css' rel='stylesheet' /> -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="mapFunctions.js" type="text/javascript"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script src="createChart.js" type="text/javascript"></script>
     <script src="http://d3js.org/d3.v4.min.js" type="text/javascript"></script>
@@ -67,6 +69,10 @@ Mapbox.com
 
 <div id="Map" class="leafletMap"></div>
 
+<div id="searchBarContainer" class="mapMenu">
+    <input type="text" name="mapSearch" placeholder="Search map..">
+</div>
+
 <div id="queryChartContainer" class="chart"></div>
 
 <div id="sourceChartContainer" class="chart"></div>
@@ -97,7 +103,6 @@ Mapbox.com
         var Map = L.map("Map").setView([0, 0], 2, {
             worldCopyJump: true
         });
-
         // Retrieve map tile from mapbox
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -124,63 +129,7 @@ Mapbox.com
         // Options for query source markers
 
 
-        var row;
-        var queryCoords;
-        var query;
-        var country;
-        var source;
-        var validation;
-        var validationColor;    // Red if DNSsec failed for query, green otherwise
-        for (var i = 0; i < data.length; i++) {
-            row = data[i];
-            source = row[4];
-            query = row[5];
-            country = row[11];
-            validation = row[15];
-
-            validationColor = "#00c153";
-            if (validation === "fail") {        // Check if requested DNSSec was invalid
-                validationColor = "#c10a00";
-            }
-            var queryMarkerOptions = {
-                radius: 7,
-                fillColor: validationColor,
-                color: 'black',
-                weight: 1,
-                opacity: .5,
-                fillOpacity: 0.5
-            };
-
-            queryCoords = L.latLng(row[13], row[14]);
-
-            var toolTip = '' +
-                "Source: " + source + "<br>" +
-                "Query: " + query + "<br>" +
-                "Country: " + country + "<br>" +
-                queryCoords + "<br>";
-
-            // add new circle marker for query to queryMarkers list
-            queryMarkers.push(new L.circleMarker(queryCoords, queryMarkerOptions)
-                .bindTooltip(toolTip)
-                .addTo(Map));
-            var pointA = queryCoords;
-            var pointB = DNSServerCoords;
-            var pointList = [pointA, pointB];
-
-            validationColor = "#42e5f4";
-            if (validation === "fail") {    // check if requested DNSSec was invalid
-                validationColor = "#c10a00";
-            }
-
-            //  Add new polyline linking source and DNS server
-            queryLines.push(new L.polyline(pointList, {
-                color: validationColor,
-                weight: 3,
-                opacity: 0.5,
-                smoothFactor: 1
-            }).addTo(Map));
-        }
-
+        displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines);
 
         var DNSServerCircle = L.circleMarker(DNSServerCoords, serverMarkerOptions).addTo(Map).bindPopup("DNS Server");
 
