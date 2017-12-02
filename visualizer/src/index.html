@@ -33,6 +33,12 @@ Mapbox.com
             crossorigin=""></script>
 
 
+    <script type="text/javascript">
+        var bodySelection = d3.select("body");
+        var header = bodySelection.append("h1");
+
+
+    </script>
 </head>
 
 <body>
@@ -79,8 +85,17 @@ Mapbox.com
 
 
 <script type="text/javascript">
+    // TODO Reformat with d3js
+    // TODO Add multiple file support
+    // TODO Add query display within timeframe
+    // TODO Add graph for failed TLDs
+    // TODO Add
+
+
+
+
     // config variables //
-    var sourceFile = "../input/ExampleInput.csv";
+    var sourceFile = "../input/dnsVis0.csv";
     // config variables //
 
     d3.text(sourceFile, function(text) {    // read CSV file
