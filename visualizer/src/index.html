@@ -41,7 +41,6 @@ Mapbox.com
 
 <body>
 
-<h1>DNS Map</h1>
 
 
 <!-- TAB FEATURES, WIP
@@ -73,9 +72,11 @@ Mapbox.com
 
 <div id="Map" class="leafletMap"></div>
 
+<!--
 <div id="searchBarContainer" class="mapMenu">
     <input type="text" name="mapSearch" placeholder="Search map..">
 </div>
+-->
 
 <div id="queryChartContainer" class="chart"></div>
 
@@ -96,7 +97,7 @@ Mapbox.com
     var sourceFile = "../input/dnsVis0.csv";
     // config variables //
 
-    d3.text(sourceFile, function(text) {    // read CSV file
+    d3.text(sourceFile, function(text){    // read CSV file
         // config variables //
         var DNSServerLat = 43;
         var DNSServerLong = -77;
@@ -150,6 +151,18 @@ Mapbox.com
         var qChart = createQueryChart(data);    // create chart with frequency of each query
         var sChart = createSourceChart(data);   // create chart with frequency of each source IP
         Map.invalidateSize(true);               // resize map
+
+        var chartCount = 0;
+        var chartDivs = [];
+        var body = d3.select('body');
+        var chartBar = body.selectAll('div')
+            .append('div')
+            .attr('class', 'btn-group');
+        var addButton = chartBar.selectAll('button')
+            .append('button')
+            .attr('text', 'Add Chart')
+            .attr('onclick', 'addChart(data, chartDivs, body, chartCount)');
+
     });
 </script>
 

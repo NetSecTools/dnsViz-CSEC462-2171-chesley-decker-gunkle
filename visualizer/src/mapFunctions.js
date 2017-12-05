@@ -1,6 +1,6 @@
 
 
-function displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines) {
+function displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines){
 
     var row;
     var queryCoords;
@@ -9,7 +9,7 @@ function displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines
     var source;
     var validation;
     var validationColor;    // Red if DNSsec failed for query, green otherwise
-    for (var i = 0; i < data.length; i++) {
+    for (var i = 0; i < data.length; i++){
         row = data[i];
         source = row[4];
         query = row[5];
@@ -17,7 +17,7 @@ function displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines
         validation = row[15];
 
         validationColor = "#00c153";
-        if (validation === "fail") {        // Check if requested DNSSec was invalid
+        if (validation === "fail"){        // Check if requested DNSSec was invalid
             validationColor = "#c10a00";
         }
         var queryMarkerOptions = {
@@ -46,7 +46,7 @@ function displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines
         var pointList = [pointA, pointB];
 
         validationColor = "#42e5f4";
-        if (validation === "fail") {    // check if requested DNSSec was invalid
+        if (validation === "fail"){    // check if requested DNSSec was invalid
             validationColor = "#c10a00";
         }
 
@@ -59,16 +59,5 @@ function displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines
         }).addTo(Map));
     }
 
-    var legend = L.control({position: 'bottomright'});
 
-    legend.onAdd = function(Map) {
-        var div = L.DomUtil.create('div', 'info legend'),
-            categories = ['DNSSEC Passed/Not requested', 'DNSSEC failed'],
-            labels = [];
-        div.innerHTML +=
-            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-        return div;
-    };
-    legend.addTo(Map);
 }
