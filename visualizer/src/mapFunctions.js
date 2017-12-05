@@ -1,4 +1,15 @@
 
+function getColor(category){
+    if (category === 'Pass'){
+        return "#00c153";
+    }
+    else if (category === 'DNS Server'){
+        return "#42e5f4";
+    }
+    else{
+        return "#c10a00";
+    }
+}
 
 function displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines) {
 
@@ -61,13 +72,19 @@ function displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines
 
     var legend = L.control({position: 'bottomright'});
 
-    legend.onAdd = function(Map) {
-        var div = L.DomUtil.create('div', 'info legend'),
-            categories = ['DNSSEC Passed/Not requested', 'DNSSEC failed'],
-            labels = [];
-        div.innerHTML +=
-            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    legend.onAdd = function (map) {
+
+        var div = L.DomUtil.create('div', 'info legend');
+
+
+        categories = ['Pass', 'Fail', 'DNS Server'];
+
+        for (var i = 0; i < categories.length; i++) {
+            div.innerHTML +=
+                '<i class="circle" style="background:' + getColor(categories[i]) + '"></i> ' +
+                (categories[i] ? categories[i] + '<br>' : '+');
+        }
+
         return div;
     };
     legend.addTo(Map);

@@ -13,15 +13,22 @@ div#Map.leafletMap {
 }
 
 .legend {
-    line-height: 18px;
-    color: #555;
+    line-height: 30px;
+    color: #9d9d9d;
 }
 .legend i {
-    width: 18px;
-    height: 18px;
+    width: 30px;
+    height: 30px;
     float: left;
     margin-right: 8px;
     opacity: 0.7;
+}
+
+.legend .circle {
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    margin-top: 8px;
 }
 
 .chart {
