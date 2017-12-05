@@ -11,6 +11,32 @@ function getColor(category){
     }
 }
 
+function addLegend(Map){
+    var legend = L.control({position: 'bottomright'});
+    legend.onAdd = function (Map) {
+        var div = L.DomUtil.create('div', 'info legend');
+        var categories = ['Pass', 'Fail', 'DNS Server'];
+        for (var i = 0; i < categories.length; i++) {
+            div.innerHTML +=
+                '<i class="circle" style="background:' + getColor(categories[i]) + '"></i> ' +
+                (categories[i] ? categories[i] + '<br>' : '+');
+        }
+        return div;
+    };
+    legend.addTo(Map);
+}
+
+function displayTitle(Map, titleText){
+    var title = L.control({position: 'topleft'});
+    title.onAdd = function (Map) {
+        var div = L.DomUtil.create('div', 'map title');
+        div.innerHTML +=
+            ('<i style="background:' + '#9d9d9d' + '"></i> ' + titleText);
+        return div;
+    };
+    title.addTo(Map);
+}
+
 function displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines) {
 
     var row;
@@ -70,22 +96,8 @@ function displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines
         }).addTo(Map));
     }
 
-    var legend = L.control({position: 'bottomright'});
-
-    legend.onAdd = function (map) {
-
-        var div = L.DomUtil.create('div', 'info legend');
 
 
-        categories = ['Pass', 'Fail', 'DNS Server'];
-
-        for (var i = 0; i < categories.length; i++) {
-            div.innerHTML +=
-                '<i class="circle" style="background:' + getColor(categories[i]) + '"></i> ' +
-                (categories[i] ? categories[i] + '<br>' : '+');
-        }
-
-        return div;
-    };
-    legend.addTo(Map);
+    addLegend(Map);
+    displayTitle(Map, "DNS Map")
 }

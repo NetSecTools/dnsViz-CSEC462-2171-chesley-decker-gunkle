@@ -107,9 +107,10 @@ Mapbox.com
         var centerCoords = DNSServerCoords;
 
         // Create map
-        var Map = L.map("Map").setView([0, 0], 2, {
+        var Map = L.map("Map", {zoomControl: false}).setView([0, 0], 2, {
             worldCopyJump: true
         });
+        new L.Control.Zoom({position: 'topright' }).addTo(Map);
         // Retrieve map tile from mapbox
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -157,6 +158,7 @@ Mapbox.com
 </body>
 
 <script type="text/javascript">
+    /*
     var headerData = [
         { "width":"100%", "height":"30px", "style":"fill:#2a2a2a" }
     ];
@@ -168,7 +170,7 @@ Mapbox.com
         .attr("y",0)
         .attr("width", window.innerWidth)
         .attr("height", 100);
-
+    */
 </script>
 
 </html>
