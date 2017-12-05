@@ -58,4 +58,17 @@ function displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines
             smoothFactor: 1
         }).addTo(Map));
     }
+
+    var legend = L.control({position: 'bottomright'});
+
+    legend.onAdd = function(Map) {
+        var div = L.DomUtil.create('div', 'info legend'),
+            categories = ['DNSSEC Passed/Not requested', 'DNSSEC failed'],
+            labels = [];
+        div.innerHTML +=
+            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+        return div;
+    };
+    legend.addTo(Map);
 }

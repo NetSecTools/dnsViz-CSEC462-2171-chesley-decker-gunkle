@@ -12,6 +12,17 @@ div#Map.leafletMap {
     background-color: #1b1b1b;
 }
 
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
 
 .chart {
     height: 400px;
@@ -31,3 +42,6 @@ input[type=text] {
 input[type=text]:focus {
     width: 75%;
 }
+
+
+
