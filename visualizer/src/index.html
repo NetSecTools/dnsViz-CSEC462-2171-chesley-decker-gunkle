@@ -28,16 +28,19 @@ Mapbox.com
     <script src="createChart.js" type="text/javascript"></script>
     <script src="http://d3js.org/d3.v4.min.js" type="text/javascript"></script>
     <script src="displayfunctions.js" type="text/javascript"></script>
-    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
-            integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
-            crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
 
 
+    <script type="text/javascript">
+        var bodySelection = d3.select("body");
+        var header = bodySelection.append("h1");
+
+
+    </script>
 </head>
 
 <body>
 
-<h1>DNS Map</h1>
 
 
 <!-- TAB FEATURES, WIP
@@ -69,9 +72,11 @@ Mapbox.com
 
 <div id="Map" class="leafletMap"></div>
 
+<!--
 <div id="searchBarContainer" class="mapMenu">
     <input type="text" name="mapSearch" placeholder="Search map..">
 </div>
+-->
 
 <div id="queryChartContainer" class="chart"></div>
 
@@ -79,11 +84,20 @@ Mapbox.com
 
 
 <script type="text/javascript">
+    // TODO Reformat with d3js
+    // TODO Add multiple file support
+    // TODO Add query display within timeframe
+    // TODO Add graph for failed TLDs
+    // TODO Add
+
+
+
+
     // config variables //
-    var sourceFile = "../../input/ExampleInput.csv";
+    var sourceFile = "../input/dnsVis0.csv";
     // config variables //
 
-    d3.text(sourceFile, function(text) {    // read CSV file
+    d3.text(sourceFile, function(text){    // read CSV file
         // config variables //
         var DNSServerLat = 43;
         var DNSServerLong = -77;
@@ -137,6 +151,18 @@ Mapbox.com
         var qChart = createQueryChart(data);    // create chart with frequency of each query
         var sChart = createSourceChart(data);   // create chart with frequency of each source IP
         Map.invalidateSize(true);               // resize map
+
+        var chartCount = 0;
+        var chartDivs = [];
+        var body = d3.select('body');
+        var chartBar = body.selectAll('div')
+            .append('div')
+            .attr('class', 'btn-group');
+        var addButton = chartBar.selectAll('button')
+            .append('button')
+            .attr('text', 'Add Chart')
+            .attr('onclick', 'addChart(data, chartDivs, body, chartCount)');
+
     });
 </script>
 

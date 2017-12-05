@@ -4,7 +4,7 @@
 /* Hide all tab content and display currently clicked tab
 Parameters: contentName, element to display
  */
-function openContent(event, contentName) {
+function openContent(event, contentName){
     var i;              // counter
     var tabcontent;
     var tablinks;
@@ -12,13 +12,13 @@ function openContent(event, contentName) {
 
     // hide currently visible content
     tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
+    for (i = 0; i < tabcontent.length; i++){
         tabcontent[i].style.display = "none";
     }
 
     // set all buttons to inactive
     tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
+    for (i = 0; i < tablinks.length; i++){
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
 
