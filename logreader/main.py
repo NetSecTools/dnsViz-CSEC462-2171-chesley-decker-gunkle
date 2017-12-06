@@ -81,7 +81,7 @@ def dnssecCheck (NAME):
         return "pass"
 
 		
-def main():
+def main2():        #This was intended for rolling data
     counter = 0
     while(True):
         contents = parseFile(LOGGING_FILE)
@@ -90,9 +90,17 @@ def main():
             continue
         if contents != []:
             writeFile(contents, "dnsVis"+str(counter), TARGET_DIR)
-            print("Wrote file:" + "dnsVis"+str(counter))
+            print("Wrote file:" + "dnsVis"+str(counter)+".csv")
             counter += 1
         sleep(SLEEP_TIMER)
+
+def main():         #This is intended for a single run
+    contents = parseFile(LOGGING_FILE)
+    if contents == None or contents == []:
+        exit(1)
+    writeFile(contents, "dnsVis0", TARGET_DIR)
+    print("Wrote file: dnsVis0.csv")
+    exit(0)
 
 
 if __name__ == "__main__":

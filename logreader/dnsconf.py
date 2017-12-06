@@ -1,4 +1,4 @@
-QUERY_LOG_FILE = "./thing"  # File to parse
+QUERY_LOG_FILE = "./defaultfile"  # File to parse
 LOCATION_FILE = "dbip.csv"
 LOCATION_URL = "http://ip-api.com/json"
 SLEEP_TIMER = 60
