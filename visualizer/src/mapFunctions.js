@@ -45,6 +45,22 @@ function addLegend(Map){
     legend.addTo(Map);
 }
 
+function addRecordLegend(Map){
+    var recLegend = L.control({position: 'bottomleft'});
+    recLegend.onAdd = function (Map) {
+        var div = L.DomUtil.create('div', 'info legend');
+        var categories = ['A', 'AAAA', 'ANY', 'CNAME', 'MX', 'NS', 'PTR', 'SIG', 'SOA', 'SRV', 'TXT'];
+        for (var i = 0; i < categories.length; i++) {
+            div.innerHTML +=
+                '<i class="circle" style="background:' + getRecordColor(categories[i]) + '"></i> ' +
+                (categories[i] ? categories[i] + '<br>' : '+');
+        }
+        return div;
+    };
+    recLegend.addTo(Map);
+}
+
+
 function displayTitle(Map, titleText){
     var title = L.control({position: 'topleft'});
     title.onAdd = function (Map) {
@@ -106,8 +122,8 @@ function displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines
             "Source: " + source + "<br>" +
             "Query: " + query + "<br>" +
             "Country: " + country + "<br>" +
-            "Record:" + recordType + "<br>" +
-            "DNSSEC" + validation + "<br>" +
+            "Record: " + recordType + "<br>" +
+            "DNSSEC: " + validation + "<br>" +
             queryCoords + "<br>";
 
         // add new circle marker for query to queryMarkers list
@@ -143,6 +159,7 @@ function displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines
     }
 
     addLegend(Map);
+    addRecordLegend(Map);
     displayTitle(Map, "DNS Map");
 
 }
