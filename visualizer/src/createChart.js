@@ -1,4 +1,6 @@
 
+
+
 function addChart(data, chartDivs, body, chartcount){
     var chartName = 'chart' + chartcount;
     chartcount++;
@@ -76,8 +78,7 @@ function createQueryChart(data){
     var query;
     var row;
     for (var i = 0; i < data.length; i++){     // Count frequency of each query
-        row = data[i];
-        query = row[5];
+        query = data[i]['query'];
         if (queryCount.hasOwnProperty(query)){
             queryCount[query]++;
         }
@@ -102,7 +103,7 @@ function createQueryChart(data){
         queryDataPoints.push({label: queryData[i][0], y: queryData[i][1]});
 
     }
-    var queryChart = new CanvasJS.Chart("queryChartContainer", {        // create chart
+    var queryChart = new CanvasJS.Chart("queryFrequency", {        // create chart
         animationEnabled: true,
 
         title: {
@@ -130,8 +131,7 @@ function createSourceChart(data){
     var srcAndPort;
     var row;
     for (var i = 0; i < data.length; i++){     // count frequency of each IP
-        row = data[i];
-        srcAndPort = row[4];
+        srcAndPort = data[i]['source'];
         srcAndPort = srcAndPort.split("#");
         srcIP = srcAndPort[0];
         if (queryCount.hasOwnProperty(srcIP)){
@@ -157,7 +157,7 @@ function createSourceChart(data){
         sourceDataPoints.push({label: queryData[i][0], y: queryData[i][1]});
         //console.log(queryData[i]);
     }
-    var sourceChart = new CanvasJS.Chart("sourceChartContainer", {
+    var sourceChart = new CanvasJS.Chart("sourceFrequency", {
         animationEnabled: true,
 
         title: {

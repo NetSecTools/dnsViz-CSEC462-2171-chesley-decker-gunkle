@@ -1,3 +1,4 @@
+day,month,year,time,source,query,record,recursion,flags,region,regionname,country,countrycode,lat,lon,isvalid
 27,10,2017,16:47:57.298,147.193.13.43#50143,liamdecker.com,NS,+,E,ENG,England,United Kingdom,GB,53.3333,-2.75,pass
 27,10,2017,16:50:03.799,223.121.46.176#46930,liamdecker.com,NS,+,E,11,Beijing Shi,China,CN,39.9118,116.359,pass
 27,10,2017,16:50:13.393,196.104.56.26#58624,liamdecker.com,SOA,+,E,110,Nairobi Province,Kenya,KE,-1.26822,36.8055,pass

@@ -14,7 +14,7 @@ Mapbox.com
 
 <head>
 
-    <!-- <link rel="stylesheet" href="tabstyle.css"/> -->
+    <link rel="stylesheet" href="tabstyle.css"/>
     <link rel="stylesheet" href="pagestyle.css"/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
           integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
@@ -72,9 +72,7 @@ Mapbox.com
     <input type="text" name="mapSearch" placeholder="Search map..">
 </div>
 -->
-<div id="queryChartContainer" class="chart"></div>
 
-<div id="sourceChartContainer" class="chart"></div>
 
 
 <script type="text/javascript">
@@ -90,101 +88,57 @@ Mapbox.com
     var sourceFile = "../input/dnsVis0.csv";
     // config variables //
 
-    d3.text(sourceFile, function(text) {    // read CSV file
+    d3.csv(sourceFile, function(data) {    // read CSV file
+
+
         // config variables //
         var DNSServerLat = 43;
         var DNSServerLong = -77;
         // config variables //
+        console.log(data);
+        console.log(data[2]['query']);
 
-        var data = d3.csvParseRows(text);
-        var queryMarkers = [];
-        var queryLines = [];
+        createMap(data, DNSServerLat, DNSServerLong);
 
-        // latLng object with DNS server coordinates
-        var DNSServerCoords = L.latLng(DNSServerLat, DNSServerLong);
-
-        // center of map
-        var centerCoords = DNSServerCoords;
-
-        // Create map
-        var Map = L.map("Map", {zoomControl: false}).setView([0, 0], 2, {
-            worldCopyJump: true
-        });
-        new L.Control.Zoom({position: 'topright' }).addTo(Map);
-        // Retrieve map tile from mapbox
-        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-            '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © ' +
-            '<a href="http://mapbox.com">Mapbox</a>',
-            maxZoom: 10,
-            minZoom: 2,
-            center: centerCoords,
-            id: 'mapbox.dark',
-            noWrap: false,
-            accessToken: 'pk.eyJ1IjoiY2NoZXNsZXkyMzk3IiwiYSI6ImNqYTR4endzNTMxY2sycXFyemduaXIxM3EifQ.gvT6NeQ0Q6ykY8PVzMhTTw'
-        }).addTo(Map);
-
-        // Options for DNS server map marker
-        var serverMarkerOptions = {
-            radius: 13,
-            fillColor: "#42e5f4",
-            color: 'black',
-            weight: 1,
-            opacity: 1,
-            fillOpacity: 0.8
-        };
-
-        // Options for query source markers
-
-
-        displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines);
-
-        var DNSServerCircle = L.circleMarker(DNSServerCoords, serverMarkerOptions).addTo(Map).bindPopup("DNS Server");
-
-
-        var qChart = createQueryChart(data);    // create chart with frequency of each query
         var sChart = createSourceChart(data);   // create chart with frequency of each source IP
-        Map.invalidateSize(true);               // resize map
     });
 </script>
 
 
 
 <div class="tab">
-    <button class="tablinks" onclick="openContent(event, 'MapWindow')">Map</button>
-    <button class="tablinks" onclick="openContent(event, 'Statistics')">Statistics</button>
-    <button class="tablinks" onclick="openContent(event, 'Test')">Test</button>
+    <button class="tablinks" onclick="openContent(event, 'queryFrequency');
+d3.csv(sourceFile, function(data) {createQueryChart(data);})">Queries by Frequency</button>
+    <button class="tablinks" onclick="openContent(event, 'sourceFrequency');
+d3.csv(sourceFile, function(data) {createSourceChart(data);})">Sources by Frequency</button>
+    <!--
+    <button class="tablinks" onclick="openContent(event, 'recordFrequency')">Requested Records by Frequency</button>
+    <button class="tablinks" onclick="openContent(event, 'countryFrequency')">Countries by Frequency</button>
+    -->
 </div>
 
 
 
 <div id="queryFrequency" class="tabcontent">
+    <script type="text/javascript">
+        d3.csv(sourceFile, function(data) {createQueryChart(data);})
+    </script>
 </div>
 
-<div id="Test" class="tabcontent">
-    <h3>Test</h3>
-    <p>Test Content</p>
+<div id="sourceFrequency" class="tabcontent">
+    <script type="text/javascript">
+        d3.csv(sourceFile, function(data) {createSourceChart(data);})
+    </script>
 </div>
 
+<div id="recordFrequency" class="tabcontent">
+</div>
 
+<div id="countryFrequency" class="tabcontent">
 
+</div>
 
 </body>
 
-<script type="text/javascript">
-    /*
-    var headerData = [
-        { "width":"100%", "height":"30px", "style":"fill:#2a2a2a" }
-    ];
-    var headerContainer = d3.select("#Header").append("svg")
-        .attr("width",200)
-        .attr("height",30);
-    var header = headerContainer.append("rect")
-        .attr("x",0)
-        .attr("y",0)
-        .attr("width", window.innerWidth)
-        .attr("height", 100);
-    */
-</script>
 
 </html>

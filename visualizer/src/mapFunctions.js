@@ -1,4 +1,55 @@
 
+
+
+
+function createMap(data, DNSServerLat, DNSServerLong){
+    var queryMarkers = [];
+    var queryLines = [];
+    // latLng object with DNS server coordinates
+    var DNSServerCoords = L.latLng(DNSServerLat, DNSServerLong);
+
+    // center of map
+    var centerCoords = DNSServerCoords;
+
+    // Create map
+    var Map = L.map("Map", {zoomControl: false}).setView([0, 0], 2, {
+        worldCopyJump: true
+    });
+    new L.Control.Zoom({position: 'topright'}).addTo(Map);
+    // Retrieve map tile from mapbox
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © ' +
+        '<a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 10,
+        minZoom: 2,
+        center: centerCoords,
+        id: 'mapbox.dark',
+        noWrap: false,
+        accessToken: 'pk.eyJ1IjoiY2NoZXNsZXkyMzk3IiwiYSI6ImNqYTR4endzNTMxY2sycXFyemduaXIxM3EifQ.gvT6NeQ0Q6ykY8PVzMhTTw'
+    }).addTo(Map);
+
+    // Options for DNS server map marker
+    var serverMarkerOptions = {
+        radius: 13,
+        fillColor: "#42e5f4",
+        color: 'black',
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8
+    };
+
+    // Options for query source markers
+
+
+    displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines);
+
+    var DNSServerCircle = L.circleMarker(DNSServerCoords, serverMarkerOptions).addTo(Map).bindPopup("DNS Server");
+
+    Map.invalidateSize(true);             // resize map
+}
+
+
 function getColor(category){
     if (category === 'Pass'){
         return "#00c153";
@@ -87,12 +138,11 @@ function displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines
     var validationColor;    // Red if DNSsec failed for query, green otherwise
     var recordType;
     for (var i = 0; i < data.length; i++){
-        row = data[i];
-        source = row[4];
-        query = row[5];
-        country = row[11];
-        validation = row[15];
-        recordType = row[6];
+        source = data[i]['source'];
+        query = data[i]['query'];
+        country = data[i]['countryname'];
+        validation = data[i]['isvalid'];
+        recordType = data[i]['record'];
 
         validationColor = getRecordColor(recordType);
         if (validation === "fail"){        // Check if requested DNSSec was invalid
@@ -116,7 +166,7 @@ function displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines
             fillOpacity: 1
         };
 
-        queryCoords = L.latLng(row[13], row[14]);
+        queryCoords = L.latLng(data[i]['lat'], data[i]['lon']);
 
         var toolTip = '' +
             "Source: " + source + "<br>" +
