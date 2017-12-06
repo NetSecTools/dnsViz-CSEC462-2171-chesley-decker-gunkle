@@ -63,7 +63,7 @@ def writeFile(contents, fileName, fileLocation):
     totalPath = fileLocation+DELIMETER+fileName+".csv"
     with open(totalPath, "w") as toWrite:
         csvWriter = csv.writer(toWrite)
-        header = "day,month,year,time,source,query,record,recursion,flags,region,regionname,country,countrycode,lat,lon,isvalid"
+        header = ["day","month","year","time","source","query","record","recursion","flags","region", "regionname","country","countrycode","lat","lon","isvalid"]
         csvWriter.writerow(header)
         for line in contents:
             csvWriter.writerow(line)
