@@ -34,6 +34,27 @@ The visualizer requires an initial internet connection for use unless manually r
 "index.html" includes a **"// config variables //"** field, which dictates the Latitude and Longitude of the DNS server,
 and the source CSV to retrieve queries from.
 
+The visualization must be run on a webserver to allow access to the input file.
+Place the visualizer contents in the content directory of your webserver.
+
+If running locally, you can use a variety of options to set up a temporary http server, examples will be included below.
+
+#### Windows Server Install
+Requirements: Node.js, Node Package Manager
+To install the http server, use the command `npm install http-server`.
+
+Navigate to the **visualizer** directory on your device, and run `http-server --cors` to start the server.
+
+This command will output the IP addresses and port numbers used to access the server.  
+The `--cors` flag is necessary to allow local file access for Javascript.
+
+The **sourceFile** field in /src/index.html should be `http://localhost:port/[input directory]` with the default configuration.
+
+#### Linux Server Install
+Requirements: Python
+Run `python3 -m http.server' and load the page on **http://localhost:8000**.
+These instructions should also work for Windows if Python is installed.
+
 Config variables:
 
     sourceFile: Path to the CSV file used for query input
