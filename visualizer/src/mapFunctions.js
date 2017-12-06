@@ -11,6 +11,25 @@ function getColor(category){
     }
 }
 
+
+/*
+Return corresponding color for record type
+ */
+function getRecordColor(record){
+    return record === "A" ? "#42e5f4" :
+        record === "AAAA" ? "#1662f4" :
+            record === "ANY" ? "#2bf465" :
+                record === "CNAME" ? "#d4f427" :
+                    record === "MX" ? "#e6beff" :
+                        record === "NS" ? "#911eb9" :
+                            record === "PTR" ? "#f4ac4e" :
+                                record === "SIG" ? "#198822" :
+                                    record === "SOA" ? "#aaffc3" :
+                                        record === "SRV" ? "#FFFFFF" :
+                                            record === "TXT" ? "#f58231" :
+                                                "#42e5f4"
+}
+
 function addLegend(Map){
     var legend = L.control({position: 'bottomright'});
     legend.onAdd = function (Map) {
@@ -37,6 +56,10 @@ function displayTitle(Map, titleText){
     title.addTo(Map);
 }
 
+
+/*
+Display markers, legends, and title on map
+ */
 function displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines){
 
     var row;
@@ -46,14 +69,16 @@ function displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines
     var source;
     var validation;
     var validationColor;    // Red if DNSsec failed for query, green otherwise
+    var recordType;
     for (var i = 0; i < data.length; i++){
         row = data[i];
         source = row[4];
         query = row[5];
         country = row[11];
         validation = row[15];
+        recordType = row[6];
 
-        validationColor = "#00c153";
+        validationColor = getRecordColor(recordType);
         if (validation === "fail"){        // Check if requested DNSSec was invalid
             validationColor = "#c10a00";
         }
@@ -66,23 +91,44 @@ function displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines
             fillOpacity: 0.5
         };
 
+        var failedQueryMarkerOptions = {
+            radius: 9,
+            fillColor: validationColor,
+            color: 'black',
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 1
+        };
+
         queryCoords = L.latLng(row[13], row[14]);
 
         var toolTip = '' +
             "Source: " + source + "<br>" +
             "Query: " + query + "<br>" +
             "Country: " + country + "<br>" +
+            "Record:" + recordType + "<br>" +
+            "DNSSEC" + validation + "<br>" +
             queryCoords + "<br>";
 
         // add new circle marker for query to queryMarkers list
-        queryMarkers.push(new L.circleMarker(queryCoords, queryMarkerOptions)
-            .bindTooltip(toolTip)
-            .addTo(Map));
+        if (validation === "pass") {
+            queryMarkers.push(new L.circleMarker(queryCoords, queryMarkerOptions)
+                .bindTooltip(toolTip)
+                .addTo(Map));
+        }
+        else{
+            var failedMarker = new L.circleMarker(queryCoords, failedQueryMarkerOptions)
+                .bindTooltip(toolTip)
+                .addTo(Map)
+                .bringToFront();
+            queryMarkers.push(failedMarker);
+
+        }
         var pointA = queryCoords;
         var pointB = DNSServerCoords;
         var pointList = [pointA, pointB];
 
-        validationColor = "#42e5f4";
+        validationColor = getRecordColor(recordType);
         if (validation === "fail"){    // check if requested DNSSec was invalid
             validationColor = "#c10a00";
         }

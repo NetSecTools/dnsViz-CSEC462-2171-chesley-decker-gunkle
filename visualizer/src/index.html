@@ -67,10 +67,11 @@ Mapbox.com
 
 <div id="Map" class="leafletMap"></div>
 
+<!--
 <div id="searchBarContainer" class="mapMenu">
     <input type="text" name="mapSearch" placeholder="Search map..">
 </div>
-
+-->
 <div id="queryChartContainer" class="chart"></div>
 
 <div id="sourceChartContainer" class="chart"></div>
@@ -81,7 +82,6 @@ Mapbox.com
     // TODO Add multiple file support
     // TODO Add query display within timeframe
     // TODO Add graph for failed TLDs
-    // TODO Add legend
 
 
 
@@ -150,7 +150,21 @@ Mapbox.com
 
 
 
+<div class="tab">
+    <button class="tablinks" onclick="openContent(event, 'MapWindow')">Map</button>
+    <button class="tablinks" onclick="openContent(event, 'Statistics')">Statistics</button>
+    <button class="tablinks" onclick="openContent(event, 'Test')">Test</button>
+</div>
 
+
+
+<div id="queryFrequency" class="tabcontent">
+</div>
+
+<div id="Test" class="tabcontent">
+    <h3>Test</h3>
+    <p>Test Content</p>
+</div>
 
 
 
