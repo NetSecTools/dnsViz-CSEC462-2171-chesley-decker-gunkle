@@ -140,7 +140,7 @@ function displayMapFeatures(Map, data, DNSServerCoords, queryMarkers, queryLines
     for (var i = 0; i < data.length; i++){
         source = data[i]['source'];
         query = data[i]['query'];
-        country = data[i]['countryname'];
+        country = data[i]['country'];
         validation = data[i]['isvalid'];
         recordType = data[i]['record'];
 
