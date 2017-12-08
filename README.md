@@ -31,7 +31,7 @@ Run main.py with python 3.5 or higher, it will continuously read from the design
 LOCATION\_URL is the designated api to reach out to for location data. If desired, this can be changed, but the findLocation() function may need to be updated to the requirements of that api
 ### Visualizer
 The visualizer requires an initial internet connection for use unless manually reconfigured with local resources.
-"index.html" includes a **"// config variables //"** field, which dictates the Latitude and Longitude of the DNS server,
+"mapFunctions.js" includes a **"// config variables //"** field, which dictates the Latitude and Longitude of the DNS server,
 and the source CSV to retrieve queries from.
 
 The visualization must be run on a webserver to allow access to the input file.
