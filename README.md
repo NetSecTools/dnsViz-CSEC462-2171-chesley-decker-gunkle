@@ -8,7 +8,7 @@ giving a geographic representation of the location of addresses being resolved b
 
 
 
-![alt text](https://github.com/cchesley2397/DNS-Map/visualizer/demo.png "Demo")
+![alt text](https://github.com/cchesley2397/DNS-Map/blob/master/visualizer/demo.PNG "Demo")
 
 
 
