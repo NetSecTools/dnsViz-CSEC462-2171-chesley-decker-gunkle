@@ -7,6 +7,12 @@ Information about requests and responses outside of the host network will be pre
 giving a geographic representation of the location of addresses being resolved by the tool.
 
 
+
+![alt text](https://github.com/cchesley2397/DNS-Map/visualizer/demo.png "Demo")
+
+
+
+
 ## Authors
 Caleb Chesley - csc1918@rit.edu - Visualization and data interpretation
 
