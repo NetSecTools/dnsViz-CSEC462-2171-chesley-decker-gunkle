@@ -1,6 +1,7 @@
 import csv
 import re
 import requests
+import os
 from time import sleep
 from dnsconf import QUERY_LOG_FILE as LOGGING_FILE
 from dnsconf import LOCATION_FILE
@@ -13,14 +14,14 @@ from dnsconf import IP_NUM
 from dnsconf import REGEX_LEN
 from dnsconf import TARGET_DIR
 from dnsconf import DELIMETER
+from dnsconf import REQ_NAME
+from dnsconf import FLAGS
 
 """Known constraints: This WILL NOT work for very large files
    I'm also making some guesses about the log file and what's important
    
    Due to rate limiting, I cannot parse more than 100 locations/min without
    paying for a higher tier"""
-
-
 """
 Takes: A filename of a file to read
 Returns: An array of arrays of parsed data
@@ -44,21 +45,26 @@ def parseFile(fileName):
         parsedLine[MONTH_NUM] = BIND_MONTHS_DICT[parsedLine[MONTH_NUM].lower()] #Change the Month to a Number
         try:
             location = findLocation(parsedLine[IP_NUM])
+            if "D" in parsedLine[FLAGS]: #Only check DNSSEC validation if query requests it
+                validation = dnssecCheck(parsedLine[REQ_NAME])
+            else:
+                validation = "pass" #Default to pass
         except:
             continue
         parsedLine.extend(location)
+        parsedLine.append(validation)
         parsedOutput.append(parsedLine)
         counter += 1
         if counter == 100: #This is only necessary because of the rate limiting, will truncate anything over 100 lines
             break           #These can be removed if the rate limiting is gone
-    for line in parsedOutput:
-        print(line)
     return parsedOutput
 
 def writeFile(contents, fileName, fileLocation):
     totalPath = fileLocation+DELIMETER+fileName+".csv"
     with open(totalPath, "w") as toWrite:
         csvWriter = csv.writer(toWrite)
+        header = ["day","month","year","time","source","query","record","recursion","flags","region", "regionname","country","countrycode","lat","lon","isvalid"]
+        csvWriter.writerow(header)
         for line in contents:
             csvWriter.writerow(line)
 
@@ -69,10 +75,15 @@ def findLocation(IP):
    data = response.json()
    return [data['region'], data['regionName'], data['country'], data['countryCode'], data['lat'], data['lon']]
 
+def dnssecCheck (NAME):
+    output = os.popen("dig +noall +comments +dnssec example.com| grep status").read()
+    if "SERVFAIL" in output:
+        return "fail"
+    else:
+        return "pass"
 
-
-
-def main():
+		
+def main2():        #This was intended for rolling data
     counter = 0
     while(True):
         contents = parseFile(LOGGING_FILE)
@@ -81,8 +92,17 @@ def main():
             continue
         if contents != []:
             writeFile(contents, "dnsVis"+str(counter), TARGET_DIR)
+            print("Wrote file:" + "dnsVis"+str(counter)+".csv")
             counter += 1
         sleep(SLEEP_TIMER)
+
+def main():         #This is intended for a single run
+    contents = parseFile(LOGGING_FILE)
+    if contents == None or contents == []:
+        exit(1)
+    writeFile(contents, "dnsVis0", TARGET_DIR)
+    print("Wrote file: dnsVis0.csv")
+    exit(0)
 
 
 if __name__ == "__main__":

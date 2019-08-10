@@ -1,0 +1,61 @@
+
+
+html {
+    font-family: "Source Sans Pro", "Helvetica Neue", sans-serif;
+    background-color: #2d2d2d;
+}
+
+
+#Map.leafletMap {
+    width: 100%;
+    height: 95vh;
+    background-color: #1b1b1b;
+}
+
+.legend {
+    line-height: 30px;
+    color: #9d9d9d;
+}
+
+.legend i {
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+.legend .circle {
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    margin-top: 8px;
+}
+
+.title {
+    font-family: "Source Sans Pro", "Helvetica Neue", sans-serif;
+    color: #9d9d9d;
+    font-size: large;
+}
+
+.chart {
+    height: 400px;
+    width: 100%;
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+input[type=text] {
+        width: 130px;
+        -webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 75%;
+}
+
+
+
